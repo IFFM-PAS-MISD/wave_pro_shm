@@ -1,0 +1,111 @@
+@inproceedings{Deraemaeker2007,
+address = {Gdansk, Poland, July 9-11},
+author = {Deraemaeker, A. and Benelechi, S. and Benjeddou, A. and Preumont, A.},
+booktitle = {III ECCOMAS Thematic Conference on Smart Structures and Materials},
+editor = {Ostachowicz, W. and Holnicki-szulc, J. and Soares, C. M.},
+pages = {1--22},
+publisher = {European Community on Computational Methods in Applied Science - ECCOMAS},
+title = {{Analytical and Numerical Computation of Homogenized Properties of MFCS: Application to Composite Boom with MFC Actuators and Sensors}},
+year = {2007}
+}
+@article{Kudela2020a,
+annote = {424/2020},
+author = {Kudela, P. and Moll, J. and Fiborek, P.},
+doi = {10.1088/1361-665X/ab9e10},
+issn = {0964-1726},
+journal = {Smart Materials and Structures},
+month = {sep},
+number = {9},
+pages = {095010},
+title = {{Parallel spectral element method for guided wave based structural health monitoring}},
+volume = {29},
+year = {2020}
+}
+@article{Fiborek2019a,
+abstract = {A new approach for numerical simulation of the wave propagation in a composite plate is presented in this paper. Problem is realized by the 2D-3D coupled time domain spectral element method. All components used in the simulation are decomposed from each other. A connection between them is guaranteed by the interface elements realized by Lagrange multipliers. With this type of scheme, one can avoid a modelling of all the components by the three-dimensional (3D) spectral elements. In particular, the computation time can be reduced by using two-dimensional (2D) elements for adhesive layer modelling. Otherwise, 3D elements are very inefficient because a convergence of Central Difference Time Integration Method applied for solving an equation of motion is strongly correlated with the size of the smallest element. Numerical calculations were performed for the composite plate modelled by the 3D solid elements with a piezoelectric transducer bonded to the plate by the adhesive layer modelled by 2D shell elements. The simulations were carried out for an adhesive layer of various thickness for the excitation frequency in the range of 50-200 kHz. The presented model was verified by experimental data obtained by the laser vibrometer.},
+author = {Fiborek, P. and Kudela, P. and Ostachowicz, W. M.},
+doi = {10.1088/1361-665X/ab0b69},
+issn = {0964-1726},
+journal = {Smart Materials and Structures},
+keywords = {CFRP plates,Lagrange multipliers,guided waves,interface,interface elements,spectral element method},
+mendeley-tags = {interface},
+month = {may},
+number = {5},
+pages = {055014},
+title = {{2D-3D interface coupling in the time domain spectral element method for the adhesive layer effects on guided wave propagation in composite plates}},
+volume = {28},
+year = {2019}
+}
+@article{Kudela2016,
+abstract = {The proposed spectral element method implementation is based on sparse matrix storage of local shape function derivatives calculated at Gauss-Lobatto-Legendre points. The algorithm utilizes two basic operations: multiplication of sparse matrix by vector and element-by-element vectors multiplication. Compute-intensive operations are performed for a part of equation of motion derived at the degree of freedom level of 3D isoparametric spectral elements. The assembly is performed at the force vector in such a way that atomic operations are minimized. This is achieved by a new mesh coloring technique The proposed parallel implementation of spectral element method on GPU is applied for the first time for Lamb wave simulations. It has been found that computation on multicore GPU is up to 14 times faster than on single CPU.},
+author = {Kudela, P.},
+doi = {10.1002/nme.5119},
+issn = {00295981},
+journal = {International Journal for Numerical Methods in Engineering},
+keywords = {GPU computing,Lamb waves,Parallel implementation,Spectral element method},
+month = {may},
+number = {6},
+pages = {413--429},
+title = {{Parallel implementation of spectral element method for Lamb wave propagation modeling}},
+volume = {106},
+year = {2016}
+}
+@misc{Rusu2020,
+author = {Rusu, C.},
+title = {{Calculating Piezoelectric Material Properties from Material Datasheet}},
+url = {https://support.onscale.com/hc/en-us/articles/360002073378-Calculating-Piezoelectric-Material-Properties-from-Material-Datasheet},
+year = {2020}
+}
+@misc{efunda,
+booktitle = {{eFunda: engineering Fundamentals}},
+title = {Piezoelectric Constitutive Equation},
+url = {https://www.efunda.com/Materials/piezo/piezo_math/math_index.cfm}
+}
+@inproceedings{Wandowski2017,
+author = {Wandowski, T. and Kudela, P. and Malinowski, P. and Ostachowicz, W.},
+booktitle = {Health Monitoring of Structural and Biological Systems 2017},
+doi = {10.1117/12.2258594},
+editor = {Kundu, Tribikram},
+month = {apr},
+pages = {101701D},
+title = {{Guided wave attenuation in composite materials}},
+year = {2017}
+}
+@article{Wandowski2019,
+abstract = {In this paper results of numerical analysis of S0/A0 elastic wave mode conversion at discontinuities in glass fibre reinforced polymer (GFRP) plates are presented. Analysis of S0/A0 mode conversion effect at Teflon inserts simulating delamination (circular Teflon inserts located at a different depth, Teflon inserts with different shapes at the same depth) and impact damage with energies 5 J, 10 J and 15 J is conducted. Numerical analysis is based on spectral element method (SEM) in the time domain. Numerical model includes a composite plate, a piezoelectric transducer and bonding layer for transducer and damage. Numerical model takes also into account the influence of material damping. Numerical results are compared with experimental results based on full wavefield measurements using scanning laser Doppler vibrometry (SLDV). It is shown that based on effects of S0/A0 mode conversion it is possible to detect the damage and determine its shape and size.},
+annote = {599/2019},
+author = {Wandowski, T. and Kudela, P. and Ostachowicz, W.M.},
+doi = {10.1016/j.compstruct.2019.02.076},
+issn = {02638223},
+journal = {Composite Structures},
+keywords = {Guided waves,Impact damage,Mode conversion,Scanning laser Doppler vibrometry,Spectral element method,journal,mode conversion},
+mendeley-tags = {journal,mode conversion},
+month = {may},
+pages = {317--330},
+title = {{Numerical analysis of elastic wave mode conversion on discontinuities}},
+volume = {215},
+year = {2019}
+}
+@article{Nicoli2023,
+abstract = {The spectral cell method has been shown as an efficient tool for performing dynamic analyses over complex domains. Its good performance can be attributed to the combination of the spectral element method with mesh-independent geometrical descriptions and the adoption of customized mass lumping procedures for elements intersected by a boundary, which enable it to exploit highly efficient, explicit solvers. In this contribution, we introduce the use of partition-of-unity enrichment functions, so that additional domain features, such as cracks or material interfaces, can be seamlessly added to the modeling process. By virtue of the optimal lumping paradigm, explicit time integration algorithms can be readily applied to the non-enriched portion of a domain, which allows one to maintain fast computing simulations. However, the handling of enriched elements remains an open issue, particularly with respect to stability and accuracy concerns. In addressing this, we propose a novel mass lumping method for enriched spectral elements in the form of a customized moment-fitting procedure and study its accuracy and stability. While the moment-fitting equations are deployed in an effort to minimize the lumping error, stability issues are alleviated by deploying a leap-frog algorithm for the solution of the equations of motion. This approach is numerically benchmarked in the 2D and 3D modeling of damaged aluminium components and validated in comparison with experimental scanning laser Doppler vibrometer data of a composite panel under piezo-electric excitation.},
+annote = {229/2023},
+author = {Nicoli, S. and Agathos, K. and Kudela, P. and Chatzi, E.},
+doi = {10.3390/app131810367},
+issn = {2076-3417},
+journal = {Applied Sciences},
+keywords = {lumping,mass matrix,moment-fitting,partition-of-unity enrichment,spectral cell method,spectral element method},
+month = {sep},
+number = {18},
+pages = {10367},
+title = {{A Moment-Fitted Extended Spectral Cell Method for Structural Health Monitoring Applications}},
+volume = {13},
+year = {2023}
+}
+@inproceedings{Kudela2024,
+address = {10-13 June, Potsdam, Germany},
+author = {Kudela, P. and Fiborek, P. and Ostachowicz, W.},
+booktitle = {11th European Workshop on Structural Health Monitoring (EWSHM 2024)},
+title = {{Wave Propagation for Structural Health Monitoring (WaveProSHM): open software with GUI}},
+year = {2024 (submitted)}
+}
+
