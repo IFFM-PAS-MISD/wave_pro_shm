@@ -14,10 +14,10 @@ The **Wave Propagation for Structural Health Monitoring (WaveProSHM)** is a stre
 Such systems are composed of an array of piezoelectric transducers (actuators and sensors) able to excite and sense elastic waves, in particular guided waves such as Lamb waves in thin plates. To facilitate the design of SHM systems and damage identification algorithms, **WaveProSHM** enable to solve coupled electromechanical equations of motion.
 
 It is intended to use **WaveProSHM** in conjunction with open source [GMSH](https://gmsh.info/) and [Paraview](https://www.paraview.org/).
-GMSH is used for mesh preparation, **WaveProSHM** for computation of elastic wave propagation problems and Paraview for visualisation of results.
+GMSH is used for mesh preparation, **WaveProSHM** for the computation of elastic wave propagation problems and Paraview for the visualisation of results.
 
 **WaveProSHM** is a result of research on several SHM-related projects. 
-If you find it useful and it is helpful in your research, we will be greatful if you cite one of our work: 
+If you find it useful and it is helpful in your research, we will be grateful if you cite one of our works: 
 
 * P. Kudela, P. Fiborek, and W. Ostachowicz. Wave Propagation for Structural Health Monitoring (WaveProSHM): open software with GUI. In *11th European Workshop on Structural Health Monitoring (EWSHM 2024)*, 10-13 June, Potsdam, Germany, 2024 (submitted).
 
@@ -32,11 +32,11 @@ If you find it useful and it is helpful in your research, we will be greatful if
 
 **WaveProSHM** was developed and tested in MATLAB version 9.14 (R2023a) environment. 
 It may or may not be compatible with previous versions of MATLAB.
-In order to fully benefit from **WaveProSHM**, Parallel Computing Toolbox is required since it enables to run parallel computations on GPU. 
+In order to fully benefit from **WaveProSHM**, the Parallel Computing Toolbox is required since it enables running parallel computations on GPU. 
 Tests were performed on Parallel Computing Toolbox version 7.8 (R2023a).
 Apart from that, CUDA-compatible GPU must be installed in the system.
 
-**WaveProSHM** still can be used without Parallel Computing Toolbox by setting computations on CPU but it is not recommended since computations takes much longer.
+**WaveProSHM** still can be used without Parallel Computing Toolbox by setting computations on CPU but it is not recommended since computations take much longer.
 
 Instalation instructions
 ------------------------
@@ -59,5 +59,5 @@ Default installation path:
 
 Please note that simple examples of meshes and inputs are stored in the installation directory in a folder ``examples``.
 
-Also, a detailed manual in the pdf format can be found in the installation directory in a folder ``docs``.
+Also, a detailed manual in the pdf format can be found in the installation directory in the folder ``docs``.
 	
