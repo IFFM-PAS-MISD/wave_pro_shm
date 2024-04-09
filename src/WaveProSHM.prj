@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="4146503142" file="/home/pkudela/work/projects/wave_pro_shm/src/WaveProSHM.prj" location="/home/pkudela/work/projects/wave_pro_shm/src" name="WaveProSHM" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="2416287684" file="/home/pkudela/work/projects/wave_pro_shm/src/WaveProSHM.prj" location="/home/pkudela/work/projects/wave_pro_shm/src" name="WaveProSHM" target="target.mlapps" target-name="Package App">
     <param.appname>WaveProSHM</param.appname>
     <param.authnamewatermark>Pawel Kudela, Piotr Fiborek</param.authnamewatermark>
     <param.email>pk@imp.gda.pl</param.email>

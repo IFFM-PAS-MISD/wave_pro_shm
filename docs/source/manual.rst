@@ -33,6 +33,9 @@ Mesh preparation in GMSH
 Mesh can be prepared directly in the graphical user interface of `GMSH <https://gmsh.info/>`_ but using input file with .geo extension enables more automated process of mesh generation. 
 Please refer to examples of .geo files located in ``gmsh_geo`` folder.
 
+.. Note::
+   The prepared mesh in GMSH must be exported to .msh format version 4 ASCII with unticked fields: ``Save all elements`` and ``Save parametric coordinates``.
+
 Physical groups and names
 -------------------------
 
@@ -60,7 +63,7 @@ More details are given in the following section.
 Conforming mesh
 ---------------
 The mesh must be prepared so that it conforms to the geometry of piezoelectric transducers (actuators and sensors), introduced cracks and delaminations.
-Note that other approaches are possible for damage modelling in which damage geometry is independent of underlying mesh :cite:p:`Nicoli2023`. However, for simplicity of the implementation, these are not considered in the version 1.0.0 of the **WaveProSHM**. 
+Note that other approaches are possible for damage modelling in which damage geometry is independent of the underlying mesh :cite:p:`Nicoli2023`. However, for simplicity of the implementation, these are not considered in version 1.0.0 of the **WaveProSHM**. 
 
 The typical case scenario of a structure with:
 
@@ -78,7 +81,7 @@ is shown below:
 Note that conforming volumes are shown for all of these cases.
 
 A mesh of a piezoelectric transducer in the form of a disk is shown in Figure **A**.
-As mentioned before, to properly characterize piezoelectric transducer the following **Physcal Groups** must be defined:
+As mentioned before, to properly characterize piezoelectric transducer the following **Physical Groups** must be defined:
 
 * **Physical Volume** which in this case has a **Physical Name**: *pzt1*;
 * **Physical Surface** corresponding to a positive electrode (**Physical Name**: *pzt1_electrode_plus*); It is usually top, free surface of the piezoelectric transducer where voltage is applied;
@@ -89,7 +92,7 @@ As mentioned before, to properly characterize piezoelectric transducer the follo
   :alt: transducer
 
 An exemplary mesh for a through-thickness crack is shown in Figure **B**.
-To properly characterize the through-thickness crack the following **Physcal Groups** must be defined:
+To properly characterize the through-thickness crack the following **Physical Groups** must be defined:
 
 * **Physical Volume** which in this case has a **Physical Name**: *crack*; It consists of all elements adjacent to the crack interface;
 * **Physical Surface** corresponding to the crack interface (**Physical Name**: *crack_interface*);
@@ -100,12 +103,12 @@ To properly characterize the through-thickness crack the following **Physcal Gro
   :alt: crack
 
 .. Note::
-   **WaveProSHM** automatially splits nodes of elements at the crack or delamination interface and introduces double nodes.
+   **WaveProSHM** automatically splits nodes of elements at the crack or delamination interface and introduces double nodes.
    Zero-gap is currently implemented and penetration of nodes is allowed. 
-   The contat at the interface as well as an initial gap setting could be possible in future. 
+   The contact at the interface as well as an initial gap setting could be possible in future. 
    
 The exemplary mesh for an embedded delamination is shown in Figure **C**.
-To properly characterize the embedded delamination the following **Physcal Groups** must be defined:
+To properly characterize the embedded delamination the following **Physical Groups** must be defined:
 
 * **Physical Volume** which in this case has a **Physical Name**: *delamination1*; It consists of all elements adjacent to the delamination interface;
 * **Physical Surface** corresponding to the delamination interface (**Physical Name**: *delamination1_interface*);

@@ -11,7 +11,7 @@ Hence, copies of some unaltered MathJax components are included.
 ## WaveProSHM
 
 The **Wave Propagation for Structural Health Monitoring (WaveProSHM)** is a streamlined implementation of the time domain spectral element method (SEM) dedicated to modelling guided wave-based structural health monitoring (SHM) systems.
-Such systems are composed of an array of piezoelectric transducers (actuators and sensors) able to excite and sense elastic waves, in particular guided waves such as Lamb waves in thin plates. To facilitate the design of SHM systems and damage identification algorithms, **WaveProSHM** enable to solve coupled electromechanical equations of motion.
+Such systems are composed of an array of piezoelectric transducers (actuators and sensors) able to excite and sense elastic waves, in particular guided waves such as Lamb waves in thin plates. To facilitate the design of SHM systems and damage identification algorithms, **WaveProSHM** enables the solution of coupled electromechanical equations of motion.
 
 It is intended to use **WaveProSHM** in conjunction with open source [GMSH](https://gmsh.info/) and [Paraview](https://www.paraview.org/).
 GMSH is used for mesh preparation, **WaveProSHM** for the computation of elastic wave propagation problems and Paraview for the visualisation of results.
@@ -38,7 +38,7 @@ Apart from that, CUDA-compatible GPU must be installed in the system.
 
 **WaveProSHM** still can be used without Parallel Computing Toolbox by setting computations on CPU but it is not recommended since computations take much longer.
 
-Instalation instructions
+Installation instructions
 ------------------------
 
 Copy ``WaveProSHM.mlappinstall`` from the ``bin`` directory to your computer. 

@@ -82,7 +82,6 @@ if(nargin == 7)
     SignalPreview = [];
     calculationProgress = [];
 end
-disp(calculationProgress)
 
 isCalculationCanceled = false;
 isCalculationFailed = false;
@@ -833,10 +832,9 @@ else
     end
 end
 
-tic;
-minTime = Inf;
-c = 0;
 timeFrames = zeros(Output.nFrames, 1);
+timeElapsedSaveFrame = zeros(Output.nFrames, 1);
+timeElapsedStep = zeros(Excitation.nSamples, 1);
 
 if isGPUavailable  % allocate on gpu
     FiS = zeros(SemMesh.nNodes, 1, 'double', 'gpuArray'); % global vector of electric potential
@@ -848,7 +846,6 @@ if isGPUavailable  % allocate on gpu
 else  % allocate on cpu
     KU_0 = zeros(SemMesh.nDofs, 1);
 end
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  MAIN LOOP
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -962,14 +959,13 @@ for iSample = 2:Excitation.nSamples
         velocitiesY(iSample, :) = V(3 * Output.responseNodes - 1, 1);
         velocitiesZ(iSample, :) = V(3 * Output.responseNodes - 0, 1);
     end
-
+    timeElapsedStep(iSample) = toc(tstart); % time step duration
     %% output frame
     % save frame to file
     if mod(iSample, Output.sampleInterval) == 0
-        telapsed = toc(tstart);   % get time elapsed
         c = c + 1;
         timeFrames(c) = Excitation.timeVector(iSample);
-        if max(abs(U)) > 100 * characteristicDistance || isnan(max(abs(U)))
+        if max(abs(U)) > 100 * characteristicDistance || isnan(max(abs(U))) % any(isnan(U))
             if isVerbose
                 % disp('integration error');
                 if(~isempty(calculationProgress))
@@ -1003,12 +999,14 @@ for iSample = 2:Excitation.nSamples
             end
             timeVector = Excitation.timeVector;
             save(Output.outfileTime, 'timeVector', 'timeFrames');
-            % rmpath(genpath('../mesher'));
-            % rmpath(genpath('./solid3d_engine'));
             return
         end
         if Output.isDisplacementFramesSelected
             Uc = gather(U);
+            frames_path = fullfile(model_output_path, filesep, 'frames_mat', filesep);
+            if ~exist(frames_path, 'dir')
+                mkdir(frames_path);
+            end
             outfile_Ux = fullfile(model_output_path, filesep, 'frames_mat', filesep, ...
                                   ['Ux_frame', num2str(iSample)]);
             outfile_Uy = fullfile(model_output_path, filesep, 'frames_mat', filesep, ...
@@ -1030,6 +1028,10 @@ for iSample = 2:Excitation.nSamples
         end
         if Output.isVelocityFramesSelected
             Vc = gather(V);
+            frames_path = fullfile(model_output_path, filesep, 'frames_mat', filesep);
+            if ~exist(frames_path, 'dir')
+                mkdir(frames_path);
+            end
             outfile_Vx = fullfile(model_output_path, filesep, 'frames_mat', filesep, ...
                                   ['Vx_frame', num2str(iSample)]);
             outfile_Vy = fullfile(model_output_path, filesep, 'frames_mat', filesep, ...
@@ -1063,10 +1065,13 @@ for iSample = 2:Excitation.nSamples
                 end
             end
         end
-
-        averageTime = telapsed;
+        % get time elapsed for frame saving
+        timeElapsedSaveFrame(c) = toc(tstart) - timeElapsedStep(iSample);   
+        averageSaveFrameTime = mean(timeElapsedSaveFrame(1:c));
+        averageTimeStep = mean(timeElapsedStep(2:iSample));
+        timeElapsed = averageSaveFrameTime + averageTimeStep * Output.sampleInterval;
         progress = round(iSample / Excitation.nSamples * 100);
-        expected_duration_seconds = (Excitation.nSamples - iSample) * averageTime;
+        expected_duration_seconds = (Output.nFrames - c) * timeElapsed;
         s = seconds(expected_duration_seconds);
         t_now = datetime('now', 'TimeZone', 'local', 'Format', 'd-MMM-y HH:mm');
         t_expected = t_now + s;
@@ -1100,8 +1105,7 @@ for iSample = 2:Excitation.nSamples
         %     disp('Remaining tasks in the queue: none');
         % end
     end
-    telapsed = toc(tstart);
-    minTime = min(telapsed, minTime);
+    
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  END OF MAIN LOOP
