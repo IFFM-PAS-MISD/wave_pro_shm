@@ -1065,19 +1065,22 @@ for iSample = 2:Excitation.nSamples
                 end
             end
         end
+        if(~isempty(SignalPreview))
+            plot(SignalPreview, Excitation.timeVector * 1e3, voltage(:, Output.sensorPreviewNo));
+        end
+        drawnow;
         % get time elapsed for frame saving
         timeElapsedSaveFrame(c) = toc(tstart) - timeElapsedStep(iSample);   
         averageSaveFrameTime = mean(timeElapsedSaveFrame(1:c));
         averageTimeStep = mean(timeElapsedStep(2:iSample));
-        timeElapsed = averageSaveFrameTime + averageTimeStep * Output.sampleInterval;
+        timeElapsed = averageSaveFrameTime + averageTimeStep * Output.sampleInterval;   
+        expectedDurationSeconds = seconds((Output.nFrames - c) * timeElapsed);
         progress = round(iSample / Excitation.nSamples * 100);
-        expected_duration_seconds = (Output.nFrames - c) * timeElapsed;
-        s = seconds(expected_duration_seconds);
-        t_now = datetime('now', 'TimeZone', 'local', 'Format', 'd-MMM-y HH:mm');
-        t_expected = t_now + s;
-        message = sprintf('Time integration\nTask progress: %d%%\nExpected finish time:\n%s', ...
-                          progress, string(t_expected));
 
+        timeNow = datetime('now', 'TimeZone', 'local', 'Format', 'd-MMM-y HH:mm');
+        timeExpected = timeNow + expectedDurationSeconds;
+        message = sprintf('Time integration\nTask progress: %d%%\nExpected finish time:\n%s', ...
+                          progress, string(timeExpected));
         if isVerbose
             if(~isempty(calculationProgress))
             calculationProgress.Value = iSample / Excitation.nSamples;
@@ -1086,26 +1089,7 @@ for iSample = 2:Excitation.nSamples
                 disp(message);
             end
         end
-        if(~isempty(SignalPreview))
-            plot(SignalPreview, Excitation.timeVector * 1e3, voltage(:, Output.sensorPreviewNo));
-        end
-        drawnow;
-        % for jj=1:length(taskList)
-        %     if(iTask==taskList(jj))
-        %         break;
-        %     end
-        % end
-        % no_of_remaining_tasks = length(taskList)-jj;
-        % if(no_of_remaining_tasks>0)
-        %     remaining_tasks =taskList(jj+1:length(taskList));
-        %     message2 = sprintf('%d remaining tasks in the queue: ',no_of_remaining_tasks);
-        %     disp(message2);
-        %     disp(remaining_tasks);
-        % else
-        %     disp('Remaining tasks in the queue: none');
-        % end
     end
-    
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%  END OF MAIN LOOP
