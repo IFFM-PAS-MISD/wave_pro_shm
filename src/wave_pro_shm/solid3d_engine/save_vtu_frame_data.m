@@ -35,10 +35,6 @@ function save_vtu_frame_data(model_output_path, iSample, Ux, Uy, Uz, Vx, Vy, Vz,
 
 % ---------------------------------------------------------------------------------------------------
 
-LAGRANGEHEXAHEDRON = 72; % element type enumeration: lagrange hexahedron element of arbitrary order
-[nElements, nElement3DNodes] = size(ParaviewMesh.element3DNodes);
-% number of mesh points (coordinates)
-nCoordinatePoints = size(ParaviewMesh.nodeCoordinates, 1);
 results_path =  fullfile(model_output_path, filesep, 'frames_vtu', filesep);
 if ~exist(results_path, 'dir')
     mkdir(results_path);
@@ -66,6 +62,7 @@ else
     StrDataArrayVelocY =  '         <DataArray type="Float64" Name="VelocitiesY" NumberOfComponents="1" format="ascii"> \n';
     StrDataArrayVelocZ =  '         <DataArray type="Float64" Name="VelocitiesZ" NumberOfComponents="1" format="ascii"> \n';
 end
+StrDataArrayClose =      '\n         </DataArray> \n';
 StrPointDataClose =       '      </PointData> \n';
 StrPieceClose =           '    </Piece> \n';
 StrUnstructuredGridClose = '  </UnstructuredGrid> \n';
