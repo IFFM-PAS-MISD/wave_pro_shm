@@ -28,4 +28,5 @@ Welcome to **WaveProSHM** documentation!
    :maxdepth: 2
    
    function_description 
+   changelog
    genindex
