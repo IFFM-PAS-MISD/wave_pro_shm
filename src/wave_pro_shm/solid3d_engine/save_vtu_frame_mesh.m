@@ -24,12 +24,16 @@ function save_vtu_frame_mesh(model_output_path, iSample, ParaviewMesh, isBinary)
 % .. Note:: Binary means base64; the implementation is reverse engineered from
 %           vtk documentation rather than by using vtkWriter interface
 %
+% .. Note:: This file uses the base64 encoder from the Apache Commons Codec, 
+%           http://commons.apache.org/codec/ and distrubed with MATLAB under
+%           the Apache License http://commons.apache.org/license.html
 %
 % (C) Copyright 2024 Pawel Kudela, pk@imp.gda.pl
 % Institute of Fluid Flow Machinery, Polish Academy of Sciences
 % Mechanics of Intelligent Structures Department
 
 % ---------------------------------------------------------------------------------------------------
+encoder = org.apache.commons.codec.binary.Base64;
 
 LAGRANGEHEXAHEDRON = 72; % element type enumeration: lagrange hexahedron element of arbitrary order
 [nElements, nElement3DNodes] = size(ParaviewMesh.element3DNodes);
@@ -87,8 +91,8 @@ fprintf(fileID, StrDataArrayPoints);
 if isBinary
     % note that transpose of nodeCoordinates is necessary because rows are written first
     dat = reshape(double(ParaviewMesh.nodeCoordinates'), 1, []);
-    temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-            matlab.net.base64encode(typecast(dat, 'uint8'))];
+    temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+            encoder.encode(typecast(dat, 'uint8'))];
     fprintf(fileID, '%s', temp);
 else
     fprintf(fileID, '%12.8f %12.8f %12.8f \n', ParaviewMesh.nodeCoordinates');
@@ -101,8 +105,8 @@ fprintf(fileID, StrDataArrayConnectivity);
 % note that transpose of element3DNodes is necessary because rows are written first
 if isBinary
     dat = reshape(int32(ParaviewMesh.element3DNodes'), 1, []);
-    temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-            matlab.net.base64encode(typecast(dat, 'uint8'))];
+    temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+            encoder.encode(typecast(dat, 'uint8'))];
     fprintf(fileID, '%s', temp);
 else
     connectivityFormat = '%d ';
@@ -116,8 +120,8 @@ fprintf(fileID, StrDataArrayOffset);
 offset = nElement3DNodes:nElement3DNodes:nElement3DNodes * nElements;
 if isBinary
     dat = int32(offset);
-    temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-            matlab.net.base64encode(typecast(dat, 'uint8'))];
+    temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+            encoder.encode(typecast(dat, 'uint8'))];
     fprintf(fileID, '%s', temp);
 else
     fprintf(fileID, '%d ', offset);
@@ -127,8 +131,8 @@ fprintf(fileID, StrDataArrayClose);
 fprintf(fileID, StrDataArrayTypes);
 if isBinary
     dat = reshape(uint8(repmat(LAGRANGEHEXAHEDRON, 1, nElements)), 1, []);
-    temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-            matlab.net.base64encode(typecast(dat, 'uint8'))];
+    temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+            encoder.encode(typecast(dat, 'uint8'))];
     fprintf(fileID, '%s', temp);
 else
     fprintf(fileID, '%d ', repmat(LAGRANGEHEXAHEDRON, 1, nElements));

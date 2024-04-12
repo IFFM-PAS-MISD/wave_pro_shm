@@ -28,19 +28,24 @@ function save_vtu_frame_data(model_output_path, iSample, Ux, Uy, Uz, Vx, Vy, Vz,
 % .. Note:: Binary means base64; the implementation is reverse engineered from
 %           vtk documentation rather than by using vtkWriter interface
 %
+% .. Note:: This file uses the base64 encoder from the Apache Commons Codec, 
+%           http://commons.apache.org/codec/ and distrubed with MATLAB under the
+%           Apache License http://commons.apache.org/license.html
+%
 %
 % (C) Copyright 2024 Pawel Kudela, pk@imp.gda.pl
 % Institute of Fluid Flow Machinery, Polish Academy of Sciences
 % Mechanics of Intelligent Structures Department
 
 % ---------------------------------------------------------------------------------------------------
+encoder = org.apache.commons.codec.binary.Base64;
 
 results_path =  fullfile(model_output_path, filesep, 'frames_vtu', filesep);
 if ~exist(results_path, 'dir')
     mkdir(results_path);
 end
 file_name = ['frame', num2str(iSample, '%07u'), '.vtu'];
-fileID = fopen(fullfile(results_path, file_name), 'a', 'ieee-le');
+fileID = fopen(fullfile(results_path, file_name), 'A', 'ieee-le');
 if fileID < 0
     disp('Cannot open file for saving vtu data');
     return
@@ -75,8 +80,8 @@ if ~isempty(Ux)
     if isBinary
         Ux(isnan(Ux)) = 0;
         dat = double(Ux);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
     else
         fprintf(fileID, '         %.15e \n', Ux);
@@ -89,8 +94,8 @@ if ~isempty(Uy)
     if isBinary
         Uy(isnan(Uy)) = 0;
         dat = double(Uy);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
     else
         fprintf(fileID, '         %.15e \n', Uy);
@@ -103,8 +108,8 @@ if ~isempty(Uz)
     if isBinary
         Uz(isnan(Uz)) = 0;
         dat = double(Uz);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
     else
         fprintf(fileID, '         %.15e \n', Uz);
@@ -117,8 +122,8 @@ if ~isempty(Vx)
     if isBinary
         Vx(isnan(Vx)) = 0;
         dat = double(Vx);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
     else
         fprintf(fileID, '         %.15e \n', Vx);
@@ -131,8 +136,8 @@ if ~isempty(Vy)
     if isBinary
         Vy(isnan(Vy)) = 0;
         dat = double(Vy);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
         fprintf(fileID, '%s', temp);
     else
@@ -146,8 +151,8 @@ if ~isempty(Vz)
     if isBinary
         Vz(isnan(Vz)) = 0;
         dat = double(Vz);
-        temp = [matlab.net.base64encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')), ...
-                matlab.net.base64encode(typecast(dat, 'uint8'))];
+        temp = [encoder.encode(typecast(uint32(numel(dat) * numel(typecast(dat(1), 'uint8'))), 'uint8')); ...
+                encoder.encode(typecast(dat, 'uint8'))];
         fprintf(fileID, '%s', temp);
     else
         fprintf(fileID, '         %.15e \n', Vz);
