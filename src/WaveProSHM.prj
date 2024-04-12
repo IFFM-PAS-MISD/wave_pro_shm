@@ -1,5 +1,5 @@
 <deployment-project plugin="plugin.apptool" plugin-version="1.0">
-  <configuration build-checksum="898910188" file="/home/pkudela/work/projects/wave_pro_shm/src/WaveProSHM.prj" location="/home/pkudela/work/projects/wave_pro_shm/src" name="WaveProSHM" target="target.mlapps" target-name="Package App">
+  <configuration build-checksum="3003853" file="/home/pkudela/work/projects/wave_pro_shm/src/WaveProSHM.prj" location="/home/pkudela/work/projects/wave_pro_shm/src" name="WaveProSHM" target="target.mlapps" target-name="Package App">
     <param.appname>WaveProSHM</param.appname>
     <param.authnamewatermark>Pawel Kudela, Piotr Fiborek</param.authnamewatermark>
     <param.email>pk@imp.gda.pl</param.email>
@@ -14,7 +14,7 @@
     <param.description>The &lt;b&gt;Wave Propagation for Structural Health Monitoring (WaveProSHM) &lt;/b&gt;is streamlined implementation of the time domain spectral element method (SEM) dedicated for modelling guided-wave-based structural health monitoring (SHM) systems.
 Such systems are composed of array of piezoelectric transducers (actuators and sensors) able to exite and sense elastic waves, in particular guided waves such as Lamb waves in thin plates. Therefore, &lt;b&gt;WaveProSHM&lt;/b&gt; enable to solve coupled electromechanical equations of motion.</param.description>
     <param.screenshot>${PROJECT_ROOT}/wave_pro_shm_logo_transparent.png</param.screenshot>
-    <param.version>1.0.0</param.version>
+    <param.version>1.1.0</param.version>
     <param.products.name>
       <item>MATLAB</item>
       <item>Parallel Computing Toolbox</item>

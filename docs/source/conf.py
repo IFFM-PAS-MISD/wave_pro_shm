@@ -23,7 +23,7 @@ copyright = "Pawel Kudela"
 author = "Pawel Kudela"
 
 # The full version, including alpha/beta/rc tags
-release = "v1.0.0"
+release = "1.1.0"
 
 
 # -- General configuration ---------------------------------------------------

@@ -37,6 +37,8 @@ List of functions in the ``solid3d_engine`` folder.
 .. autofunction:: pzt_coupling_matrices
 .. autofunction:: save_pvd_animation
 .. autofunction:: save_vtu_frame
+.. autofunction:: save_vtu_frame_mesh
+.. autofunction:: save_vtu_frame_data
 .. autofunction:: shape3d_prim_coeff
 .. autofunction:: shape3d_prim_coeff_single_node
 .. autofunction:: solid3d_engine

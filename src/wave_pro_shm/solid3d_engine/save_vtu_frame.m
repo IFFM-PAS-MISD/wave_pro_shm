@@ -5,7 +5,7 @@ function save_vtu_frame(model_output_path, iSample, ParaviewMesh, Ux, Uy, Uz, Vx
 %
 % USAGE::
 %
-%   save_vtu_frame(model_output_path,iSample,Ux,Uy,Uz,Vx,Vy,Vz)
+%   save_vtu_frame(model_output_path,iSample,ParaviewMesh,Ux,Uy,Uz,Vx,Vy,Vz,isBinary)
 %
 % Arguments:
 %     model_output_path (string):
