@@ -116,10 +116,20 @@ Layers {1}; Recombine;
 };
 
 // Additional points in surfaces for outputs
+pzt1_center_bottom = newp; Point(pzt1_center_bottom) = {xpzt1,ypzt1,0, 1} ;
+Point{pzt1_center_bottom} In Surface {pzt1_surf};
+
 pzt1_center = newp; Point(pzt1_center) = {xpzt1,ypzt1,plate_thickness, 1} ;
 Point{pzt1_center} In Surface {underpzt1_vol_above[0]};
+
+pzt2_center_bottom = newp; Point(pzt2_center_bottom) = {xpzt2,ypzt2,0, 1} ;
+Point{pzt2_center_bottom} In Surface {pzt2_surf};
+
 pzt2_center = newp; Point(pzt2_center) = {xpzt2,ypzt2,plate_thickness, 1} ;
 Point{pzt2_center} In Surface {underpzt2_vol_above[0]};
+
+delam1_center_bottom = newp; Point(delam1_center_bottom) = {xdelam,ydelam,0, 1} ;
+Point{delam1_center_bottom} In Surface {delam1_surf};
 
 delam1_center = newp; Point(delam1_center) = {xdelam,ydelam,plate_thickness, 1} ;
 Point{delam1_center} In Surface {delam1_vol_above[0]};
