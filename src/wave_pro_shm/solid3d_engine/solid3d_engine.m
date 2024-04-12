@@ -749,6 +749,34 @@ Output.outfileTime = fullfile(model_output_path, 'timeVector');
 if Output.isVtuOutput
     [ParaviewMesh] = sem2paraview_mesh(SemMesh);
 end
+% save mesh related fields to one frame
+if Output.isVtuOutput
+    iSample = Output.sampleInterval;
+    try
+        save_vtu_frame_mesh(model_output_path, iSample, ParaviewMesh, Output.isBinary);
+    catch
+        if isVerbose
+            if(~isempty(calculationProgress))
+                calculationProgress.Value = 0;
+                calculationProgress.Message = 'Problem saving mesh to vtu file';
+                disp('Problem saving mesh to vtu file');
+            else
+                disp('Problem saving mesh to vtu file');
+            end
+        end
+        isCalculationFailed = true;
+        return
+    end
+    results_path =  fullfile(model_output_path, filesep, 'frames_vtu', filesep);
+    file_name = ['frame', num2str(iSample, '%07u'), '.vtu'];
+    source_file = fullfile(results_path, file_name);
+    % copy the content to all remaining frames
+    for iSample = 2 * Output.sampleInterval:Output.sampleInterval:Output.nFrames * Output.sampleInterval
+        file_name = ['frame', num2str(iSample, '%07u'), '.vtu'];
+        destination_file = fullfile(results_path, file_name);
+        copyfile(source_file, destination_file);
+    end
+end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % U - displacements
 % F - forces
@@ -967,10 +995,10 @@ for iSample = 2:Excitation.nSamples
         timeFrames(c) = Excitation.timeVector(iSample);
         if max(abs(U)) > 100 * characteristicDistance || isnan(max(abs(U))) % any(isnan(U))
             if isVerbose
-                % disp('integration error');
                 if(~isempty(calculationProgress))
-                calculationProgress.Value = iSample / Excitation.nSamples;
-                calculationProgress.Message = 'Integration error';
+                    calculationProgress.Value = iSample / Excitation.nSamples;
+                    calculationProgress.Message = 'Integration error';
+                    disp('Integration error');
                 else
                     disp('Integration error');
                 end
@@ -1054,11 +1082,11 @@ for iSample = 2:Excitation.nSamples
         if Output.isVtuOutput
             if Output.isDisplacementFramesSelected || Output.isVelocityFramesSelected
                 try
-                    save_vtu_frame(model_output_path, iSample, ParaviewMesh, ...
+                    save_vtu_frame_data(model_output_path, iSample, ...
                                    Ux, Uy, Uz, Vx, Vy, Vz, Output.isBinary);
                 catch
                     if isVerbose
-                        disp('Problem saving vtu file');
+                        disp('Problem saving data to vtu file');
                     end
                     isCalculationFailed = true;
                     return
@@ -1083,8 +1111,8 @@ for iSample = 2:Excitation.nSamples
                           progress, string(timeExpected));
         if isVerbose
             if(~isempty(calculationProgress))
-            calculationProgress.Value = iSample / Excitation.nSamples;
-            calculationProgress.Message = message;
+                calculationProgress.Value = iSample / Excitation.nSamples;
+                calculationProgress.Message = message;
             else
                 disp(message);
             end
