@@ -1,5 +1,11 @@
-Changelog
-**************
+Version changes
+***************
+
+Version 1.1.2
+==============
+
+* bugfix: missing load/save data in gui (on processing tab)
+* correction of geo files (examples) for mesh conforming to additional response points 
 
 Version 1.1.0
 ==============

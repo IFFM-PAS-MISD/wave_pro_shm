@@ -24,9 +24,14 @@ Welcome to **WaveProSHM** documentation!
    feature_request
    
 .. toctree::
+   :caption: Changelog
+   :maxdepth: 2
+   
+   changelog
+   
+.. toctree::
    :caption: Source
    :maxdepth: 2
    
    function_description 
-   changelog
    genindex

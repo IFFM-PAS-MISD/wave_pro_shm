@@ -8,7 +8,3 @@ Known issues
 
 None
 
-Bug fixes
-==========
-
-None
