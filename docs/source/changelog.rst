@@ -1,6 +1,12 @@
 Version changes
 ***************
 
+Version 1.2.1
+==============
+
+* computation speed up by different implementation of global force vector assembly
+* bugfix: missing number for mesh conversion from gmsh to sem mesh for 2D spectral element (order 5)  
+
 Version 1.1.2
 ==============
 
